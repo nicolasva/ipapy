@@ -39,7 +39,9 @@ defmodule IpapyWeb.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:redix, ">= 0.0.0"},
-     {:phoenix_slime, github: "slime-lang/phoenix_slime"}
+     {:phoenix_slime, github: "slime-lang/phoenix_slime"},
+     {:comeonin, "~> 4.0"},
+     {:bcrypt_elixir, "~> 0.12.0"}
    ]
   end
 

@@ -4,7 +4,15 @@
       p Oops, something went wrong! Please check the errors below.
   .form-group
     = label f, :name, class: "control-label"
-    = text_input f, :name, class: "form-control"
+    = text_input f, :name, placeholder: "Name", class: "form-control"
     = error_tag f, :name
+  .form-group
+    = label f, :username, class: "control-label"
+    = text_input f, :username, placeholder: "Username", class: "form-control"
+    = error_tag f, :username
+  .form-group
+    = label f, :password, class: "control-label"
+    = text_input f, :password, class: "form-control"
+    = error_tag f, :password
   .form-group
     = submit "Submit", class: "btn btn-primary"

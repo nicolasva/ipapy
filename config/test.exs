@@ -9,6 +9,12 @@ config :ipapy_web, IpapyWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+config :argon2_elixir,
+  t_cost: 2,
+  m_cost: 12
+config :bcrypt_elixir, log_rounds: 4
+config :pbkdf2_elixir, rounds: 1
+
 # Configure your database
 config :ipapy_web, IpapyWeb.Repo,
   adapter: Ecto.Adapters.Postgres,

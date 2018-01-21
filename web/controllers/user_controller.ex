@@ -20,7 +20,7 @@ defmodule IpapyWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "#{user.name} created successfully.")
-        |> redirect(to: user_path(conn, :show, user))
+        |> redirect(to: user_path(conn, :index, user))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
