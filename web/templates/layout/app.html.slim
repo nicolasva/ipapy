@@ -12,6 +12,17 @@ html lang="en"
   body
     .container
       header.header
+        ol.breadcrumb.text-right
+          = if @current_user do
+            li
+              = @current_user.username
+            li
+              = link "Déconnexion", to: auth_session_path(@conn, :delete, @current_user), method: "delete"
+          - else
+            li
+              = link "Register", to: user_path(@conn, :new)
+            li
+              = link "Log in", to: auth_session_path(@conn, :new)
         nav role="navigation"
           ul.nav.nav-pills.pull-right
             li
