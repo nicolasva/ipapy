@@ -1,0 +1,7 @@
+= form_for @conn, @action, @as_session, fn f ->
+  .form-group
+    = text_input f, :username, placeholder: "Username", class: "form-control"
+  .form-group
+    = text_input f, :password, placeholder: "Password", class: "form-control"
+  .form-group
+    = submit "Submit", class: "btn btn-primary"

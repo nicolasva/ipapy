@@ -1,10 +1,8 @@
 defmodule IpapyWeb.AuthSessionController do
   use IpapyWeb.Web, :controller
 
-  alias IpapyWeb.User
-
-  def new(conn, _)
-    render conn, "new.html"
+  def new(conn, _) do
+    render(conn, "new.html")
   end
 
   def create(conn, %{"auth_session" => %{"username" => user, "password" => pass}}) do

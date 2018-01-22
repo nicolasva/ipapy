@@ -1,6 +1,8 @@
 defmodule IpapyWeb.Auth do
   import Plug.Conn
 
+  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+
   def init(opts) do
     Keyword.fetch!(opts, :repo)
   end
@@ -16,5 +18,20 @@ defmodule IpapyWeb.Auth do
     |> assign(:current_user, user)
     |> put_session(:user_id, user.id)
     |> configure_session(renew: true)
+  end
+
+  def login_by_username_and_pass(conn, username, given_pass, opts) do
+    repo = Keyword.fetch!(opts, :repo)
+    user = repo.get_by(IpapyWeb.User, username: username)
+
+    cond do
+      user && checkpw(given_pass, user.encrypted_password) ->
+        {:ok, login(conn, user)}
+      user ->
+        {:error, :unauthorized, conn}
+      true ->
+        dummy_checkpw()
+        {:error, :not_found, conn}
+    end
   end
 end
