@@ -21,6 +21,7 @@ defmodule IpapyWeb.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
+        |> IpapyWeb.Auth.login(user)
         |> put_flash(:info, "#{user.name} created successfully.")
         |> redirect(to: user_path(conn, :index, user))
       {:error, changeset} ->

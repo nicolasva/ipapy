@@ -19,6 +19,7 @@ defmodule IpapyWeb.Router do
 
     get "/", PageController, :index
     resources "/users", UserController, only: [:index, :show, :new, :create]
+    resources "/auth_sessions", AuthSessionController, only: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.
