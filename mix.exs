@@ -19,7 +19,7 @@ defmodule IpapyWeb.Mixfile do
   def application do
     [mod: {IpapyWeb, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :postgrex, :comeonin, :bamboo]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,7 +41,9 @@ defmodule IpapyWeb.Mixfile do
      {:redix, ">= 0.0.0"},
      {:phoenix_slime, github: "slime-lang/phoenix_slime"},
      {:comeonin, "~> 4.0"},
-     {:bcrypt_elixir, "~> 0.12.0"}
+     {:bcrypt_elixir, "~> 0.12.0"},
+     {:bamboo, "~> 0.7"},
+     {:bamboo_smtp, "~> 1.2.1"}
    ]
   end
 

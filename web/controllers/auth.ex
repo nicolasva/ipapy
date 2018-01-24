@@ -35,6 +35,23 @@ defmodule IpapyWeb.Auth do
     end
   end
 
+  def send_mail(conn, user) do
+    #conn
+    #|>
+  end
+
+  def losing_password(conn, email, opts) do
+    repo = Keyword.fetch!(opts, :repo)
+    user = repo.get_by(IpapyWeb.User, email: email)
+
+    cond do
+      user ->
+        {:ok, conn}
+      true ->
+        {:error, :not_found, conn}
+    end
+  end
+
   def logout(conn) do
     configure_session(conn, drop: true)
   end

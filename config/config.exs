@@ -11,6 +11,16 @@ config :phoenix_slime, :use_slim_extension, true
 config :ipapy_web,
   ecto_repos: [IpapyWeb.Repo]
 
+config :ipapy_web, IpapyWeb.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "smtp.gmail.com",
+  port: 465,
+  username: "nicolas.vandenbogaerde@æmail.com",
+  password: "nic0lasva",
+  ssl: true,
+  retries: 1
+
+
 # Configures the endpoint
 config :ipapy_web, IpapyWeb.Endpoint,
   url: [host: "localhost"],
