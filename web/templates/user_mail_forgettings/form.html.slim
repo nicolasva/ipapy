@@ -1,0 +1,7 @@
+= form_for @conn, @action, @as_user, fn f ->
+  .form-group
+    = label f, :email, class: "control-label"
+    = text_input f, :email, placeholder: "Email", class: "form-control"
+    = error_tag f, :email
+  .form-group
+    = submit "Submit", class: "btn btn-primary"

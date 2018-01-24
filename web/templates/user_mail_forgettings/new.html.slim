@@ -1,0 +1,3 @@
+h2 Mot de passe oublié
+
+= render "form.html", conn: @conn, action: user_mail_forgettings_path(@conn, :create), as_user: [as: :user]
