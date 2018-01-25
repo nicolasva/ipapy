@@ -43,7 +43,8 @@ defmodule IpapyWeb.Mixfile do
      {:comeonin, "~> 4.0"},
      {:bcrypt_elixir, "~> 0.12.0"},
      {:bamboo, "~> 0.7"},
-     {:bamboo_smtp, "~> 1.2.1"}
+     {:bamboo_smtp, "~> 1.2.1"},
+     {:random_bytes, "~> 1.0"}
    ]
   end
 

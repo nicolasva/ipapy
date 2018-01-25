@@ -35,9 +35,8 @@ defmodule IpapyWeb.Auth do
     end
   end
 
-  def send_mail(conn, user) do
-    #conn
-    #|>
+  def send_mail(conn, user, password) do
+    IpapyWeb.Email.send_new_password_temporary_html(user.email, password) |> Mailer.deliver_now
   end
 
   def losing_password(conn, email, opts) do
@@ -47,6 +46,19 @@ defmodule IpapyWeb.Auth do
     cond do
       user ->
         {:ok, conn}
+      true ->
+        {:error, :not_found, conn}
+    end
+  end
+
+  def init_password(conn, user) do
+    password = RandomBytes.base16(4)
+    encrypted_password = Comeonin.Bcrypt.hashpwsalt(pass)
+    user = User.changeset(user, encrypted_password: encrypted_password)
+
+    cond do
+      user && user.encrypted_password == encrypted_password ->
+        {:ok, send_mail(conn, user, password)}
       true ->
         {:error, :not_found, conn}
     end
