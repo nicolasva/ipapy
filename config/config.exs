@@ -15,7 +15,7 @@ config :ipapy_web, IpapyWeb.Mailer,
   adapter: Bamboo.SMTPAdapter,
   server: "smtp.gmail.com",
   port: 465,
-  username: "nicolas.vandenbogaerde@æmail.com",
+  username: "nicolas.vandenbogaerde@gmail.com",
   password: "nic0lasva",
   ssl: true,
   retries: 1
