@@ -21,6 +21,7 @@ defmodule IpapyWeb.Router do
     resources "/users", UserController, only: [:index, :show, :new, :create]
     resources "/auth_sessions", AuthSessionController, only: [:new, :create, :delete]
     resources "/user_mail_forgettings", UserMailForgettingsController, only: [:new, :create]
+    resources "/change_password", ChangePasswordController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.

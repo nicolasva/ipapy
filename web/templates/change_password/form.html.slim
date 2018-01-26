@@ -1,0 +1,15 @@
+= form_for @conn, @action, @as_user, fn f ->
+  .form-group
+    = label f, :actualy_password, class: "control-label"
+    = text_input f, :actualy_password, placeholder: "Ancien mot de passe", class: "form-control"
+    = error_tag f, :actualy_password
+  .form-group
+    = label f, :password, class: "control-label"
+    = text_input f, :password, placeholder: "Nouveau mot de passe", class: "form-control"
+    = error_tag f, :password
+  .form-group
+    = label f, :confirmation_password, class: "control-label"
+    = text_input f, :confirmation_password, placeholder: "Confirmation du mot de passe", class: "form-control"
+    = error_tag f, :confirmation_password
+  .form-group
+    = submit "Valider", class: "btn btn-primary"
