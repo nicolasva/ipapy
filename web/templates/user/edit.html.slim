@@ -1,5 +1,4 @@
 h2 Edit user
 
-= render "form.html", changeset: @changeset, action: user_path(@conn, :update, @user)
-
+= render "form.html", changeset: @changeset, action: user_path(@conn, :update, @user), as_edit: List.last(@conn.path_info) != "edit"
 = link "Back", to: user_path(@conn, :index)

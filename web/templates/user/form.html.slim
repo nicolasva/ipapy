@@ -10,9 +10,11 @@
     = label f, :username, class: "control-label"
     = text_input f, :username, placeholder: "Username", class: "form-control"
     = error_tag f, :username
-  .form-group
-    = label f, :password, class: "control-label"
-    = text_input f, :password, class: "form-control"
-    = error_tag f, :password
+
+  = if @as_edit do
+    .form-group
+      = label f, :password, class: "control-label"
+      = text_input f, :password, class: "form-control"
+      = error_tag f, :password
   .form-group
     = submit "Valider", class: "btn btn-primary"

@@ -18,7 +18,7 @@ defmodule IpapyWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/users", UserController, only: [:index, :show, :new, :create]
+    resources "/users", UserController, only: [:index, :show, :new, :create, :edit, :update]
     resources "/auth_sessions", AuthSessionController, only: [:new, :create, :delete]
     resources "/user_mail_forgettings", UserMailForgettingsController, only: [:new, :create]
     resources "/change_password", ChangePasswordController, only: [:new, :create]
