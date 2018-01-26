@@ -46,16 +46,19 @@ defmodule IpapyWeb.Auth do
 
     cond do
       user ->
-        {:ok, init_password(conn, user)}
+        {:ok, init_password(conn, user, opts)}
       true ->
         {:error, :not_found, conn}
     end
   end
 
-  def init_password(conn, user) do
+  def init_password(conn, user, opts) do
     password = RandomBytes.base16(4)
     encrypted_password = Comeonin.Bcrypt.hashpwsalt(password)
     user_update = IpapyWeb.User.changeset(user, %{encrypted_password: encrypted_password})
+    user_update = IpapyWeb.Repo.update user_update
+    repo = Keyword.fetch!(opts, :repo)
+    user = repo.get_by(IpapyWeb.User, email: user.email)
     send_mail(conn, user, password)
   end
 

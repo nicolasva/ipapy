@@ -15,7 +15,7 @@ defmodule IpapyWeb.Email do
     email
     |> send_new_password_temporary_text()
     |> html_body("New password")
-    |> put_html_layout({IpapyWeb.LayoutView, "email.html"})
+    #|> put_html_layout({IpapyWeb.LayoutView, "email.html"})
     |> render("send_password_temporary.html", password: password)
   end
 end
