@@ -1,8 +1,8 @@
 = form_for @conn, @action, @as_user, fn f ->
   .form-group
-    = label f, :actualy_password, class: "control-label"
-    = text_input f, :actualy_password, placeholder: "Ancien mot de passe", class: "form-control"
-    = error_tag f, :actualy_password
+    = label f, :current_password, class: "control-label"
+    = text_input f, :current_password, placeholder: "Ancien mot de passe", class: "form-control"
+    = error_tag f, :current_password
   .form-group
     = label f, :password, class: "control-label"
     = text_input f, :password, placeholder: "Nouveau mot de passe", class: "form-control"

@@ -4,7 +4,7 @@ defmodule IpapyWeb.User do
   schema "users" do 
     field :name, :string
     field :username, :string
-    field :actualy_password, :string, virtual: true
+    field :current_password, :string, virtual: true
     field :password, :string, virtual: true
     field :confirmation_password, :string, virtual: true
     field :encrypted_password, :string
@@ -19,18 +19,11 @@ defmodule IpapyWeb.User do
     |> validate_length(:username, min: 1, max: 20)
   end
 
-  def changeset_password(model, params \\ :invalid) do
-    model
-    |> cast(params, ~w(old_password, password, confirmation_password), [])
-    |> password_validate()
-  end
-
   def changeset_forgetting_mdp(model, params \\ :invalid) do
     model
     |> cast(params, ~w(email), [])
     |> validate_email_format()
   end
-
 
   def registration_changeset(model, params) do
     model

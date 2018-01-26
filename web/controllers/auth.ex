@@ -20,6 +20,40 @@ defmodule IpapyWeb.Auth do
     |> configure_session(renew: true)
   end
 
+  def change_password(conn, current_password, password, confirmation_password, current_user, opts) do
+    cond do
+      checkpw(current_password, current_user.encrypted_password) ->
+        check_new_password(conn, password, confirmation_password, current_user, opts)
+      true ->
+        dummy_checkpw()
+        {:error, :current_password_error, conn}
+    end
+  end
+
+  def check_new_password(conn, password, confirmation_password, current_user, opts) do
+    cond do
+      password == confirmation_password ->
+        register_new_password(conn, password, current_user, opts)
+      true ->
+        {:error, :confirmation_password_error, conn}
+    end
+  end
+
+  def register_new_password(conn, password, current_user, opts) do
+    repo = Keyword.fetch!(opts, :repo)
+    user = IpapyWeb.Repo.get(IpapyWeb.User, current_user.id)
+    encrypted_password = Comeonin.Bcrypt.hashpwsalt(password)
+    user_update = IpapyWeb.User.changeset(user, %{encrypted_password: encrypted_password})
+    user_update = IpapyWeb.Repo.update user_update
+    if user_update do
+      user = repo.get_by(IpapyWeb.User, encrypted_password: encrypted_password)
+      assign(conn, :current_user, user)
+      {:ok, conn}
+    else
+      {:error, :not_update, conn}
+    end
+  end
+
   def login_by_username_and_pass(conn, username, given_pass, opts) do
     repo = Keyword.fetch!(opts, :repo)
     user = repo.get_by(IpapyWeb.User, username: username)
