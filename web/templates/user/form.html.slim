@@ -11,6 +11,31 @@
     = text_input f, :username, placeholder: "Username", class: "form-control"
     = error_tag f, :username
 
+  .form-group
+    = label f, :email, class: "control-label"
+    = text_input f, :email, placeholder: "Email", class: "form-control"
+    = error_tag f, :email
+
+  .form-group
+    = label f, :address, class: "control-label"
+    = text_input f, :address, placeholder: "Addresse", class: "form-control"
+    = error_tag f, :address
+
+  .form-group
+    = label f, :cp_postal, class: "control-label"
+    = text_input f, :cp_postal, placeholder: "Code Postal", class: "form-control"
+    = error_tag f, :cp_postal
+
+  .form-group
+    = label f, :city, class: "control-label"
+    = text_input f, :city, placeholder: "Ville", class: "form-control"
+    = error_tag f, :city
+
+  .form-group
+    = label f, :country, class: "control-label"
+    = text_input f, :country, placeholder: "Ville", class: "form-control"
+    = error_tag f, :country
+
   = if @as_edit do
     .form-group
       = label f, :password, class: "control-label"

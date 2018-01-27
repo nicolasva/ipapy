@@ -9,13 +9,18 @@ defmodule IpapyWeb.User do
     field :confirmation_password, :string, virtual: true
     field :encrypted_password, :string
     field :email, :string
+    field :address, :string
+    field :cp_postal, :string
+    field :city ,:string
+    field :country, :string
     timestamps()
   end
 
   def changeset(model, params \\ :invalid) do
     model
-    |> cast(params, ~w(name username email), [])
+    |> cast(params, ~w(name username email address cp_postal city country), [])
     |> validate_email_format()
+    |> validate_required([:name, :username, :email, :address, :cp_postal, :city, :country])
     |> validate_length(:username, min: 1, max: 20)
   end
 
