@@ -1,0 +1,17 @@
+h2 Listing role
+
+table.table
+  thead
+    tr
+      th
+  tbody
+    = for role <- @role do
+      tr
+        td class="text-right"
+          = link "Show", to: role_path(@conn, :show, role), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Edit", to: role_path(@conn, :edit, role), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Delete", to: role_path(@conn, :delete, role), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+= link "New role", to: role_path(@conn, :new)

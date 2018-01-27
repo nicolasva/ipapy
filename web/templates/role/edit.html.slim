@@ -1,0 +1,5 @@
+h2 Edit role
+
+= render "form.html", changeset: @changeset, action: role_path(@conn, :update, @role)
+
+= link "Back", to: role_path(@conn, :index)

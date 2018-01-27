@@ -9,3 +9,12 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+changeset = IpapyWeb.Role.changeset(%IpapyWeb.Role{}, %{role: "own"})
+IpapyWeb.Repo.insert(changeset)
+
+changeset = IpapyWeb.Role.changeset(%IpapyWeb.Role{}, %{role: "customer"})
+IpapyWeb.Repo.insert(changeset)
+
+changeset = IpapyWeb.Role.changeset(%IpapyWeb.Role{}, %{role: "admin"})
+IpapyWeb.Repo.insert(changeset)
