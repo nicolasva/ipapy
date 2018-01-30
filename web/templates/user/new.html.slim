@@ -1,5 +1,5 @@
 h2 Nouvelle utilisateur
 
-= render "form.html", changeset: @changeset, action: user_path(@conn, :create)
+= render "form.html", changeset: @changeset, action: user_path(@conn, :create), as_edit: List.last(@conn.path_info) != "edit"
 
 = link "Back", to: user_path(@conn, :index)

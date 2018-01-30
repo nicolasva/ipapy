@@ -10,11 +10,29 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-changeset = IpapyWeb.Role.changeset(%IpapyWeb.Role{}, %{role: "own"})
-IpapyWeb.Repo.insert(changeset)
+encrypted_password = Comeonin.Bcrypt.hashpwsalt("infonies")
+user = %IpapyWeb.User{name: "VANDENBOGAERDE", username: "Nicolas", encrypted_password: encrypted_password, email: "nicolas.vandenbogaerde@gmail.com", address: "30 Rue François Arago", cp_postal: "93500", city: "PANTIN", country: "France"}
+user = IpapyWeb.Repo.insert!(user)
 
-changeset = IpapyWeb.Role.changeset(%IpapyWeb.Role{}, %{role: "customer"})
-IpapyWeb.Repo.insert(changeset)
+role0 = %IpapyWeb.Role{role_value: 0}
+role0 = IpapyWeb.Repo.insert!(role0)
 
-changeset = IpapyWeb.Role.changeset(%IpapyWeb.Role{}, %{role: "admin"})
-IpapyWeb.Repo.insert(changeset)
+role1 = %IpapyWeb.Role{role_value: 1}
+role1 = IpapyWeb.Repo.insert!(role1)
+
+role2 = %IpapyWeb.Role{role_value: 2}
+role2 = IpapyWeb.Repo.insert!(role2)
+
+user = IpapyWeb.Repo.get_by(IpapyWeb.User, name: "VANDENBOGAERDE")
+
+role = IpapyWeb.Repo.get_by(IpapyWeb.Role, role_value: 0)
+
+user = IpapyWeb.Repo.preload(user, :roles)
+
+role = IpapyWeb.Repo.preload(role, :users)
+
+changeset = Ecto.Changeset.change(user) |> Ecto.Changeset.put_assoc(:roles, [role])
+
+IpapyWeb.Repo.update!(changeset)
+
+

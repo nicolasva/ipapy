@@ -36,6 +36,12 @@
     = text_input f, :country, placeholder: "Ville", class: "form-control"
     = error_tag f, :country
 
+  //ul
+    = for role <- @roles do
+      li
+        = role.role_value
+        = checkbox f, :roles, name: "user[roles][#{role.id}]", value: role.id, checked: true
+
   = if @as_edit do
     .form-group
       = label f, :password, class: "control-label"

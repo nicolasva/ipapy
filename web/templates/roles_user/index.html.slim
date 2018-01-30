@@ -1,0 +1,17 @@
+h2 Listing roles user
+
+table.table
+  thead
+    tr
+      th
+  tbody
+    //= for roles_user <- @roles_user do
+    //  tr
+    //    td class="text-right"
+          //= link "Show", to: roles_user_path(@conn, :show, roles_user), class: "btn btn-default btn-xs"
+          //| &nbsp;
+          //= link "Edit", to: roles_user_path(@conn, :edit, roles_user), class: "btn btn-default btn-xs"
+          //| &nbsp;
+          //= link "Delete", to: roles_user_path(@conn, :delete, roles_user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+//= link "New roles user", to: roles_user_path(@conn, :new)

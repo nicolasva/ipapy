@@ -1,0 +1,9 @@
+= form_for @conn, @action, @as_role, fn f ->
+  .form-group
+    ul
+      = for role <- @roles do
+        li
+          = role.role_value
+          = checkbox f, :roles, name: "user[roles][#{role.id}]", value: role.id, checked: true
+  .form-group
+    = submit "Submit", class: "btn btn-primary"

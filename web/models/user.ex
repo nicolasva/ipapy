@@ -20,7 +20,6 @@ defmodule IpapyWeb.User do
   def changeset(model, params \\ :invalid) do
     model
     |> cast(params, ~w(name username email address cp_postal city country), [])
-    #|> put_assoc(:roles, parse_tags(params))
     |> validate_email_format()
     |> validate_required([:name, :username, :email, :address, :cp_postal, :city, :country])
     |> validate_length(:username, min: 1, max: 20)
@@ -53,8 +52,8 @@ defmodule IpapyWeb.User do
 
   defp put_encrypted_password(changeset) do
     case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
-        put_change(changeset, :encrypted_password, Comeonin.Bcrypt.hashpwsalt(pass))
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        put_change(changeset, :encrypted_password, Comeonin.Bcrypt.hashpwsalt(password))
       _ ->
         changeset
     end
