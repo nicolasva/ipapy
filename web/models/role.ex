@@ -16,7 +16,7 @@ defmodule IpapyWeb.Role do
   end
 
   def role_value(key) do
-     ["admin", "professionnel", "client"]
+    Enum.at(["admin", "professionnel", "client"], key)
   end
 
   @doc """

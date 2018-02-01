@@ -1,7 +1,7 @@
 defmodule IpapyWeb.RolesUserController do
   use IpapyWeb.Web, :controller
 
-  #alias IpapyWeb.RolesUser
+  alias IpapyWeb.Role
 
   def index(conn, _params) do
     roles_user = Repo.all(RolesUser)
@@ -16,9 +16,19 @@ defmodule IpapyWeb.RolesUserController do
     render(conn, "new.html", user: user, roles: roles)
   end
 
-  def create(conn, %{"roles" => roles_user_params}) do
-    #changeset = RolesUser.changeset(%RolesUser{}, roles_user_params)
-
+  def create(conn, %{"user_id" => user_id, "role" => role}) do
+    #changeset = RolesUser.changeset(%RolesUser{}, roles)
+    IO.inspect role["roles"]
+    case IpapyWeb.Service.RolesUsers.assoc_roles_users(conn, [role], user_id) do
+      {:ok, conn} ->
+        conn
+        |> put_flash(:info, "Vous avez bien été enregistré dans ces catégories utilisateurs")
+        |> redirect(to: page_path(conn, :index))
+      {:error, _reason, conn} ->
+        conn
+        |> put_flash(:error, "vous n'avez pas été enregistré dans cette catégorie utilisateur")
+        |> render("new.html")
+    end
     #case Repo.insert(changeset) do
     #  {:ok, roles_user} ->
       #    conn

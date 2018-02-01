@@ -3,7 +3,7 @@
     ul
       = for role <- @roles do
         li
-          = role.role_value
-          = checkbox f, :roles, name: "user[roles][#{role.id}]", value: role.id, checked: true
+          = IpapyWeb.Role.role_value(role.role_value)
+          = checkbox f, :roles, name: "role[roles][#{role.id}]", value: role.id, checked: true
   .form-group
     = submit "Submit", class: "btn btn-primary"
