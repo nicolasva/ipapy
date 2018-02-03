@@ -2,8 +2,9 @@
   .form-group
     ul
       = for role <- @roles do
-        li
-          = IpapyWeb.Role.role_value(role.role_value)
-          = checkbox f, :roles, name: "role[roles][#{role.id}]", value: role.id, checked: true
+        = if IpapyWeb.Role.role_value(role.role_value) != "admin" do
+          li
+            = IpapyWeb.Role.role_value(role.role_value)
+            = checkbox f, :roles, name: "role[roles][#{role.id}]", value: role.id, checked: true
   .form-group
     = submit "Submit", class: "btn btn-primary"
