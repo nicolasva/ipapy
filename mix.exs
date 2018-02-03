@@ -44,7 +44,8 @@ defmodule IpapyWeb.Mixfile do
      {:bcrypt_elixir, "~> 0.12.0"},
      {:bamboo, "~> 0.7"},
      {:bamboo_smtp, "~> 1.2.1"},
-     {:random_bytes, "~> 1.0"}
+     {:random_bytes, "~> 1.0"},
+     {:canary, github: "cpjk/canary"},
    ]
   end
 
