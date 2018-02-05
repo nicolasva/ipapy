@@ -17,6 +17,14 @@ defmodule IpapyWeb.User do
     timestamps()
   end
 
+  def user_role_checked?(user_id, role_id) do
+    user = IpapyWeb.Repo.all from user in IpapyWeb.User,
+                             join: role in assoc(user, :roles),
+                             where: role.id == ^role_id,
+                             where: user.id == ^user_id
+    if (user == []), do: false, else: true
+  end
+
   def changeset(model, params \\ :invalid) do
     model
     |> cast(params, ~w(name username email address cp_postal city country), [])

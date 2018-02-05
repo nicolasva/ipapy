@@ -11,14 +11,13 @@ defmodule IpapyWeb.RolesUserController do
   def new(conn, _params) do
     #user_id = _params["user_id"]
     user = IpapyWeb.Repo.get!(IpapyWeb.User, _params["user_id"])
-    roles = IpapyWeb.Repo.all(IpapyWeb.Role)
+    roles = IpapyWeb.Role.roles_without_admin
     #changeset = RolesUser.changeset(%RolesUser{})
     render(conn, "new.html", user: user, roles: roles)
   end
 
   def create(conn, %{"user_id" => user_id, "role" => role}) do
     #changeset = RolesUser.changeset(%RolesUser{}, roles)
-    IO.inspect role["roles"]
     case IpapyWeb.Service.RolesUsers.assoc_roles_users(conn, [role], user_id) do
       {:ok, conn} ->
         conn
@@ -40,13 +39,15 @@ defmodule IpapyWeb.RolesUserController do
   end
 
 
-  #def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => user_id}) do
+    roles = IpapyWeb.Role.roles_without_admin
     #roles_user = Repo.get!(RolesUser, id)
     #changeset = RolesUser.changeset(roles_user)
     #render(conn, "edit.html", roles_user: roles_user, changeset: changeset)
-  #end
+    render(conn, "edit.html", user: conn.assigns.current_user, roles: roles)
+  end
 
-  #def update(conn, %{"id" => id, "roles_user" => roles_user_params}) do
+  def update(conn, %{"id" => id, "roles_user" => roles_user_params}) do
     #roles_user = Repo.get!(RolesUser, id)
     #changeset = RolesUser.changeset(roles_user, roles_user_params)
 
@@ -58,7 +59,7 @@ defmodule IpapyWeb.RolesUserController do
     #{:error, changeset} ->
       #    render(conn, "edit.html", roles_user: roles_user, changeset: changeset)
       #end
-  #end
+  end
 
   #def delete(conn, %{"id" => id}) do
     #roles_user = Repo.get!(RolesUser, id)

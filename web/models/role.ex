@@ -15,6 +15,13 @@ defmodule IpapyWeb.Role do
     timestamps()
   end
 
+  def roles_without_admin do
+    query = from role in IpapyWeb.Role,
+            where: role.role_value != 0,
+            select: role
+    IpapyWeb.Repo.all(query)
+  end
+
   def role_value(key) do
     Enum.at(["admin", "professionnel", "client"], key)
   end

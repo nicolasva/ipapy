@@ -1,4 +1,5 @@
 h2 Edit roles user
-//= render "form.html", conn: @conn, action: roles_user_path(@conn, :update, @roles_user)
+
+= render "form.html", conn: @conn, action: roles_user_path(@conn, :update, @user), as_role: [as: :role], roles: @roles, user: @user
 
 //= link "Back", to: roles_user_path(@conn, :index)

@@ -15,7 +15,9 @@ html lang="en"
         ol.breadcrumb.text-right
           = if @current_user do
             li
-              = @current_user.username
+              = link @current_user.username, to: user_path(@conn, :edit, @conn.assigns.current_user)
+              | &nbsp;
+              = link "", to: user_path(@conn, :edit, @conn.assigns.current_user), class: "glyphicon glyphicon-pencil"
             li
               = link "Déconnexion", to: auth_session_path(@conn, :delete, @current_user), method: "delete"
           - else

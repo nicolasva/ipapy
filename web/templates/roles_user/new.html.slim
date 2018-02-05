@@ -1,5 +1,5 @@
 //h2 New roles user
 
-= render "form.html", conn: @conn, action: user_roles_user_path(@conn, :create, @user), as_role: [as: :role], roles: @roles
+= render "form.html", conn: @conn, action: user_roles_user_path(@conn, :create, @user), as_role: [as: :role], roles: @roles, user: @user
 
 //= link "Back", to: roles_user_path(@conn, :index)

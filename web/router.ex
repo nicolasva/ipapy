@@ -21,6 +21,12 @@ defmodule IpapyWeb.Router do
     resources "/users", UserController, only: [:index, :show, :new, :create, :edit, :update] do
       resources "/roles_user", RolesUserController, only: [:new, :create, :edit, :update]
     end
+    #user_roles_user_path  GET     /users/:user_id/roles_user/:id/edit  IpapyWeb.RolesUserController :edit
+    #user_roles_user_path  PATCH   /users/:user_id/roles_user/:id       IpapyWeb.RolesUserController :update
+    #                      PUT     /users/:user_id/roles_user/:id       IpapyWeb.RolesUserController :update
+    put "/roles_user/:id", RolesUserController, :update, as: :roles_user
+    patch "/roles_user/:id", RolesUserController, :update, as: :roles_user
+    get "/roles_user/:id/edit", RolesUserController, :edit, as: :roles_user
     resources "/auth_sessions", AuthSessionController, only: [:new, :create, :delete]
     resources "/user_mail_forgettings", UserMailForgettingsController, only: [:new, :create]
     resources "/change_password", ChangePasswordController, only: [:new, :create]

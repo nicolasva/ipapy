@@ -5,6 +5,6 @@
         = if IpapyWeb.Role.role_value(role.role_value) != "admin" do
           li
             = IpapyWeb.Role.role_value(role.role_value)
-            = checkbox f, :roles, name: "role[roles][#{role.id}]", value: role.id, checked: true
+            = checkbox f, :roles, name: "role[roles][#{role.id}]", value: role.id, checked: IpapyWeb.User.user_role_checked?(@user.id, role.id)
   .form-group
     = submit "Submit", class: "btn btn-primary"
