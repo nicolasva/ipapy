@@ -1,0 +1,17 @@
+h2 Listing retirement home
+
+table.table
+  thead
+    tr
+      th
+  tbody
+    = for retirement_home <- @retirement_home do
+      tr
+        td class="text-right"
+          = link "Show", to: retirement_home_path(@conn, :show, retirement_home), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Edit", to: retirement_home_path(@conn, :edit, retirement_home), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Delete", to: retirement_home_path(@conn, :delete, retirement_home), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+= link "New retirement home", to: retirement_home_path(@conn, :new)

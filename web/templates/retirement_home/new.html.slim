@@ -1,0 +1,5 @@
+h2 New retirement home
+
+= render "form.html", changeset: @changeset, action: retirement_home_path(@conn, :create)
+
+= link "Back", to: retirement_home_path(@conn, :index)
