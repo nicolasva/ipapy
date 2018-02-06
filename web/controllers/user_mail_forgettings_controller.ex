@@ -6,7 +6,7 @@ defmodule IpapyWeb.UserMailForgettingsController do
   end
 
   def create(conn, %{"user" => %{"email" => email}}) do
-    case IpapyWeb.Auth.losing_password(conn, email, repo: Repo) do
+    case IpapyWeb.Service.AuthService.losing_password(conn, email, repo: Repo) do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "Mot de passe envoyé")

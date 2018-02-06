@@ -8,7 +8,7 @@ defmodule IpapyWeb.ChangePasswordController do
   end
 
   def create(conn, %{"user" => %{"current_password" => current_password, "password" => password, "confirmation_password" => confirmation_password}}) do
-    case IpapyWeb.Auth.change_password(conn, current_password, password, confirmation_password, conn.assigns.current_user, repo: Repo) do
+    case IpapyWeb.Service.AuthService.change_password(conn, current_password, password, confirmation_password, conn.assigns.current_user, repo: Repo) do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "Le changement du mot de passe s'est bien déroulé")

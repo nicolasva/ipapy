@@ -6,7 +6,7 @@ defmodule IpapyWeb.AuthSessionController do
   end
 
   def create(conn, %{"auth_session" => %{"username" => user, "password" => pass}}) do
-    case IpapyWeb.Auth.login_by_username_and_pass(conn, user, pass, repo: Repo) do
+    case IpapyWeb.Service.AuthService.login_by_username_and_pass(conn, user, pass, repo: Repo) do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "Welcome back!")
@@ -20,7 +20,7 @@ defmodule IpapyWeb.AuthSessionController do
 
   def delete(conn, _) do
     conn
-    |> IpapyWeb.Auth.logout()
+    |> IpapyWeb.Service.AuthService.logout()
     |> redirect(to: page_path(conn, :index))
   end
 end

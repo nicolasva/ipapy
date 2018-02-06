@@ -7,7 +7,7 @@ defmodule IpapyWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug IpapyWeb.Auth, repo: IpapyWeb.Repo
+    plug IpapyWeb.Service.AuthService, repo: IpapyWeb.Repo
   end
 
   pipeline :api do

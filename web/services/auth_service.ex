@@ -1,4 +1,4 @@
-defmodule IpapyWeb.Auth do
+defmodule IpapyWeb.Service.AuthService do
   import Plug.Conn
 
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]

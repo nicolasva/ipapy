@@ -1,4 +1,4 @@
-defmodule IpapyWeb.Service.RolesUsers do
+defmodule IpapyWeb.Service.RolesUsersService do
   import Plug.Conn
 
   def assoc_roles_users(conn, role, user_id) do
