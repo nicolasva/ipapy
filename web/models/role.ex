@@ -11,7 +11,7 @@ defmodule IpapyWeb.Role do
 
   schema "roles" do
     field :role_value, :integer
-    many_to_many :users, IpapyWeb.User, join_through: "roles_users"
+    many_to_many :users, IpapyWeb.User, join_through: "roles_users", on_replace: :delete
     timestamps()
   end
 

@@ -47,18 +47,17 @@ defmodule IpapyWeb.RolesUserController do
     render(conn, "edit.html", user: conn.assigns.current_user, roles: roles)
   end
 
-  def update(conn, %{"id" => id, "roles_user" => roles_user_params}) do
-    #roles_user = Repo.get!(RolesUser, id)
-    #changeset = RolesUser.changeset(roles_user, roles_user_params)
-
-    #case Repo.update(changeset) do
-    #  {:ok, roles_user} ->
-      #    conn
-      #  |> put_flash(:info, "Roles user updated successfully.")
-        #|> redirect(to: roles_user_path(conn, :show, roles_user))
-    #{:error, changeset} ->
-      #    render(conn, "edit.html", roles_user: roles_user, changeset: changeset)
-      #end
+  def update(conn, %{"id" => user_id, "role" => role}) do
+    case IpapyWeb.Service.RolesUsers.assoc_roles_users(conn, [role], user_id) do
+      {:ok, conn} ->
+        conn
+        |> put_flash(:info, "Vous avez bien été enregistré dans ces catégories utilisateurs")
+        |> redirect(to: page_path(conn, :index))
+      {:error, _reason, conn} ->
+        conn
+        |> put_flash(:error, "vous n'avez pas été enregistré dans cette catégorie utilisateur")
+        |> render("new.html")
+    end
   end
 
   #def delete(conn, %{"id" => id}) do

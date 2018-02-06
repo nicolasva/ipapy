@@ -2,6 +2,7 @@ defmodule IpapyWeb.Service.RolesUsers do
   import Plug.Conn
 
   def assoc_roles_users(conn, role, user_id) do
+    IO.inspect "user_id -=-=-=-=-=-=-=-=-=--#{user_id}"
     roles = Enum.at(role, 0)
     user = IpapyWeb.Repo.get!(IpapyWeb.User, user_id)
     user = IpapyWeb.Repo.preload(user, :roles)
