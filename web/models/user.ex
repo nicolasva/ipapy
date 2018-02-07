@@ -14,6 +14,7 @@ defmodule IpapyWeb.User do
     field :city ,:string
     field :country, :string
     many_to_many :roles, IpapyWeb.Role, join_through: "roles_users", on_replace: :delete
+    has_many :retirement_homes, IpapyWeb.RetirementHome
     timestamps()
   end
 

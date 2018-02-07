@@ -9,21 +9,38 @@ defmodule IpapyWeb.RetirementHomeController do
   end
 
   def new(conn, _params) do
-    changeset = RetirementHome.changeset(%RetirementHome{})
+    #changeset = RetirementHome.changeset(%RetirementHome{})
+    changeset = 
+      conn.assigns.current_user
+      |> build_assoc(:retirement_homes)
+      |> RetirementHome.changeset()
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"retirement_home" => retirement_home_params}) do
-    changeset = RetirementHome.changeset(%RetirementHome{}, retirement_home_params)
+    #changeset = RetirementHome.changeset(%RetirementHome{}, retirement_home_params)
 
-    case Repo.insert(changeset) do
-      {:ok, retirement_home} ->
-        conn
-        |> put_flash(:info, "Retirement home created successfully.")
-        |> redirect(to: retirement_home_path(conn, :show, retirement_home))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
+    #case Repo.insert(changeset) do
+    #  {:ok, retirement_home} ->
+      #    conn
+      #    |> put_flash(:info, "Retirement home created successfully.")
+      #  |> redirect(to: retirement_home_path(conn, :show, retirement_home))
+    #{:error, changeset} ->
+      #    render(conn, "new.html", changeset: changeset)
+      #end
+      changeset = 
+        conn.assigns.current_user
+        |> build_assoc(:retirement_homes)
+        |> RetirementHome.changeset()
+
+      case Repo.insert(changeset) do
+        {:ok, _retirement_home} ->
+          conn
+          |> put_flash(:info, "Cette maison de retraite a bien été enregistré.")
+          |> redirect(to: user_retirement_home_path(conn, :show, conn.assigns.current_user, _retirement_home))
+        {:error, changeset} ->
+          render(conn, "new.html", changeset: changeset)
+      end
   end
 
   def show(conn, %{"id" => id}) do
@@ -45,7 +62,7 @@ defmodule IpapyWeb.RetirementHomeController do
       {:ok, retirement_home} ->
         conn
         |> put_flash(:info, "Retirement home updated successfully.")
-        |> redirect(to: retirement_home_path(conn, :show, retirement_home))
+        |> redirect(to: user_retirement_home_path(conn, :show, conn.assigns.current_user, retirement_home))
       {:error, changeset} ->
         render(conn, "edit.html", retirement_home: retirement_home, changeset: changeset)
     end
@@ -60,6 +77,6 @@ defmodule IpapyWeb.RetirementHomeController do
 
     conn
     |> put_flash(:info, "Retirement home deleted successfully.")
-    |> redirect(to: retirement_home_path(conn, :index))
+    |> redirect(to: user_retirement_home_path(conn, :index, conn.assigns.current_user))
   end
 end

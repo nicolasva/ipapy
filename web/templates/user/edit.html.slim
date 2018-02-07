@@ -6,7 +6,9 @@ h2 Edit user
       = link "Votre profil", to: user_path(@conn, :edit, @conn.assigns.current_user)
     li.list-group-item
       = link "Votre catégorie", to: roles_user_path(@conn, :edit, @conn.assigns.current_user)
-
+    = if IpapyWeb.User.user_role_checked?(@conn.assigns.current_user.id, IpapyWeb.Repo.get_by(IpapyWeb.Role, role_value: IpapyWeb.Role.role_value[:admin]).id) do
+      li.list-group-item
+        = link "Ajouter une maison de retraite", to: user_retirement_home_path(@conn, :new, @conn.assigns.current_user)
 .col-md-8.col-sm-8.col-xs-12
   = render "form.html", changeset: @changeset, action: user_path(@conn, :update, @user), as_edit: List.last(@conn.path_info) != "edit"
   //= link "Back", to: user_path(@conn, :index)

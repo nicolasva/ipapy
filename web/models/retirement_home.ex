@@ -2,16 +2,22 @@ defmodule IpapyWeb.RetirementHome do
   use IpapyWeb.Web, :model
 
   schema "retirement_home" do
-
+    field :title, :string
+    field :detail, :string
+    field :star_rating, :integer
+    belongs_to :user, IpapyWeb.User
     timestamps()
   end
+
+  @required_fields ~w(title)
+  @optional_fields ~w(detail)
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [])
-    |> validate_required([])
+  def changeset(model, params \\ %{}) do
+    model
+    |> cast(params, @required_fields, @optional_fields)
+    #|> validate_required([])
   end
 end
