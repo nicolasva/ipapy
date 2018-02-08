@@ -3,4 +3,12 @@
     .alert.alert-danger
       p Oops, something went wrong! Please check the errors below.
   .form-group
+    = label f, :title, class: "control-label"
+    = text_input f, :title, placeholder: "Titre", class: "form-control"
+    = error_tag f, :title
+  .form-group
+    = label f, :detail, class: "control-label"
+    = text_input f, :detail, placeholder: "Detail", class: "form-control"
+    = error_tag f, :detail
+  .form-group
     = submit "Submit", class: "btn btn-primary"

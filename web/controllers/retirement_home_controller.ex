@@ -18,20 +18,10 @@ defmodule IpapyWeb.RetirementHomeController do
   end
 
   def create(conn, %{"retirement_home" => retirement_home_params}) do
-    #changeset = RetirementHome.changeset(%RetirementHome{}, retirement_home_params)
-
-    #case Repo.insert(changeset) do
-    #  {:ok, retirement_home} ->
-      #    conn
-      #    |> put_flash(:info, "Retirement home created successfully.")
-      #  |> redirect(to: retirement_home_path(conn, :show, retirement_home))
-    #{:error, changeset} ->
-      #    render(conn, "new.html", changeset: changeset)
-      #end
       changeset = 
         conn.assigns.current_user
         |> build_assoc(:retirement_homes)
-        |> RetirementHome.changeset()
+        |> RetirementHome.changeset(retirement_home_params)
 
       case Repo.insert(changeset) do
         {:ok, _retirement_home} ->
