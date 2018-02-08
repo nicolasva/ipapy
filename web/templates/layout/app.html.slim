@@ -12,6 +12,7 @@ html lang="en"
   body
     .container
       header.header
+        = link " ", to: page_path(@conn, :index), class: "header_ipapy"
         ol.breadcrumb.text-right
           = if @current_user do
             li
@@ -25,10 +26,10 @@ html lang="en"
               = link "Register", to: user_path(@conn, :new)
             li
               = link "Log in", to: auth_session_path(@conn, :new)
-        nav role="navigation"
-          ul.nav.nav-pills.pull-right
-            li
-              a href="#" Ipapy
+        //nav role="navigation"
+        //  ul.nav.nav-pills.pull-right
+        //    li
+        //      a href="#" Ipapy
 
       p.alert.alert-info role="alert"= get_flash(@conn, :info)
       p.alert.alert-danger role="alert"= get_flash(@conn, :error)

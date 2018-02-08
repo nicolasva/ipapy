@@ -1,7 +1,8 @@
-h2 Show retirement home
+h2
+  = @retirement_home.title
 
-ul
-
+.detail
+  = @retirement_home.detail
 //= link "Edit", to: retirement_home_path(@conn, :edit, @retirement_home)
 //| &nbsp;
 //= link "Back", to: retirement_home_path(@conn, :index)
