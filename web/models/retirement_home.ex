@@ -5,6 +5,12 @@ defmodule IpapyWeb.RetirementHome do
     field :title, :string
     field :detail, :string
     field :star_rating, :integer
+    field :rating_director, :integer
+    field :rating_1, :integer, virtual: true
+    field :rating_2, :integer, virtual: true
+    field :rating_3, :integer, virtual: true
+    field :rating_4, :integer, virtual: true
+    field :rating_5, :integer, virtual: true
     belongs_to :user, IpapyWeb.User
     timestamps()
   end

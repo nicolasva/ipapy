@@ -18,5 +18,5 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
+import "./front/retirement_home/form.js"
 // import socket from "./socket"
-//= require star_rating/star-rating.min.js
