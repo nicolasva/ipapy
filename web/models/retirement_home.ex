@@ -23,7 +23,7 @@ defmodule IpapyWeb.RetirementHome do
   """
   def changeset(model, params \\ :invalid) do
     model
-    |> cast(params, ~w(title detail), [])
+    |> cast(params, ~w(title detail rating_director), [])
     #|> cast(params, @required_fields, @optional_fields)
     |> validate_required([:title, :detail])
   end
