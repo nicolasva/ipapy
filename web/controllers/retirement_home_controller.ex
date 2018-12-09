@@ -3,13 +3,19 @@ defmodule IpapyWeb.RetirementHomeController do
 
   alias IpapyWeb.RetirementHome
 
+  #plug :authenticate when action in [:index, :new, :create]
+  
   def index(conn, _params) do
-    retirement_home = Repo.all(RetirementHome)
-    render(conn, "index.html", retirement_home: retirement_home)
+    #retirement_homes = Repo.get_by RetirementHome, user_id: _params["user_id"]
+    #retirement_homes = Repo.all(RetirementHome)
+    retirement_homes = 
+      Repo.get(IpapyWeb.User, _params["user_id"]) 
+      |> Repo.preload(:retirement_homes) 
+    render(conn, "index.html", retirement_homes: retirement_homes)
   end
 
   def new(conn, _params) do
-    #changeset = RetirementHome.changeset(%RetirementHome{})
+    #changeset = RetirementHome.changeset(%RetirementHome{user_id: _params["user_id"]})
     changeset = 
       conn.assigns.current_user
       |> build_assoc(:retirement_homes)
@@ -18,19 +24,20 @@ defmodule IpapyWeb.RetirementHomeController do
   end
 
   def create(conn, %{"retirement_home" => retirement_home_params}) do
-      changeset = 
+    changeset = 
         conn.assigns.current_user
         |> build_assoc(:retirement_homes)
         |> RetirementHome.changeset(retirement_home_params)
-
-      case Repo.insert(changeset) do
-        {:ok, _retirement_home} ->
-          conn
-          |> put_flash(:info, "Cette maison de retraite a bien été enregistré.")
-          |> redirect(to: user_retirement_home_path(conn, :show, conn.assigns.current_user, _retirement_home))
-        {:error, changeset} ->
-          render(conn, "new.html", changeset: changeset)
-      end
+    #changeset = RetirementHome.changeset(%RetirementHome{}, retirement_home_params)
+    
+    case Repo.insert(changeset) do
+      {:ok, _retirement_home} ->
+        conn
+        |> put_flash(:info, "Cette maison de retraite a bien été enregistré.")
+        |> redirect(to: user_retirement_home_path(conn, :show, conn.assigns.current_user, _retirement_home))
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
   end
 
   def show(conn, %{"id" => id}) do

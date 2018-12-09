@@ -36,7 +36,7 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :ipapy_web, IpapyWeb.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "nicolas",
+  username: "phoenix",
   password: "infonies",
   database: "ipapy_dev",
   hostname: "localhost",

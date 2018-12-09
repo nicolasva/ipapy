@@ -15,7 +15,7 @@ defmodule IpapyWeb.RetirementHome do
     timestamps()
   end
 
-  @required_fields ~w(title)
+  @required_fields ~w(title, user_id)
   @optional_fields ~w(detail)
 
   @doc """
@@ -25,6 +25,6 @@ defmodule IpapyWeb.RetirementHome do
     model
     |> cast(params, ~w(title detail rating_director), [])
     #|> cast(params, @required_fields, @optional_fields)
-    |> validate_required([:title, :detail])
+    |> validate_required([:title, :detail, :user_id])
   end
 end
