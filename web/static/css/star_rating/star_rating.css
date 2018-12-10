@@ -48,3 +48,21 @@
 .wrapper label:hover:before {
   color: #FFC107;
 }
+
+.ui-rating {
+  background-image: url("/images/front/star_rating/icon_star.png");
+}
+
+.ui-rating_valid {
+  background-position: 4px -53px;
+  padding: 58px 5px 0px 38px;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+.ui-rating_not_valid {
+  background-position: -158px -53px;
+  padding: 58px 5px 0px 38px;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}

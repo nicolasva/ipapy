@@ -8,10 +8,10 @@ defmodule IpapyWeb.RetirementHomeController do
   def index(conn, _params) do
     #retirement_homes = Repo.get_by RetirementHome, user_id: _params["user_id"]
     #retirement_homes = Repo.all(RetirementHome)
-    retirement_homes = 
+    users = 
       Repo.get(IpapyWeb.User, _params["user_id"]) 
       |> Repo.preload(:retirement_homes) 
-    render(conn, "index.html", retirement_homes: retirement_homes)
+    render(conn, "index.html", retirement_homes: users.retirement_homes)
   end
 
   def new(conn, _params) do

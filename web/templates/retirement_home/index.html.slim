@@ -5,8 +5,23 @@ table.table
     tr
       th
         = "Title"
-    tr
       th
+        = "Note"
   tbody
+    = for retirement_home <- @retirement_homes do
+      tr
+          td
+            = retirement_home.title
+          td
+            //- Enum.each([1, 2, 3], fn x -> 
+            //   = x
+            .wrapper
+              = if retirement_home.rating_director > 0 do
+                = for rating <- Enum.flat_map([{1, retirement_home.rating_director}], fn {x, y} -> x..y end) do
+                  span.ui-rating.ui-rating_valid
+              = if retirement_home.rating_director < 5 do
+                = for rating <- Enum.flat_map([{1, 5-retirement_home.rating_director}], fn {x, y} -> x..y end) do
+                  span.ui-rating.ui-rating_not_valid
+
 
 = link "New retirement home", to: user_retirement_home_path(@conn, :new, @conn.assigns.current_user)
