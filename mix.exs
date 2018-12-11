@@ -46,6 +46,8 @@ defmodule IpapyWeb.Mixfile do
      {:bamboo_smtp, "~> 1.2.1"},
      {:random_bytes, "~> 1.0"},
      {:canary, github: "cpjk/canary"},
+     {:arc_ecto, "~> 0.11.1"},
+     {:arc, "~> 0.11.0"},
    ]
   end
 
