@@ -2,7 +2,7 @@ defmodule IpapyWeb.Picture do
   use IpapyWeb.Web, :model
   schema "pictures" do
     field :title, :string
-    field :picture, :string
+    field :picture, IpapyWeb.PictureUploader.Type
     field :uuid, :string
     belongs_to :retirement_home, IpapyWeb.RetirementHome
     timestamps()
