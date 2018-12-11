@@ -20,6 +20,8 @@ config :ipapy_web, IpapyWeb.Mailer,
   ssl: true,
   retries: 1
 
+config :arc,
+  storage: Arc.Storage.Local
 
 # Configures the endpoint
 config :ipapy_web, IpapyWeb.Endpoint,

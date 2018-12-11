@@ -19,7 +19,7 @@ defmodule IpapyWeb.Mixfile do
   def application do
     [mod: {IpapyWeb, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin, :bamboo]]
+                    :phoenix_ecto, :postgrex, :comeonin, :bamboo, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
