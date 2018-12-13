@@ -2,7 +2,9 @@ defmodule IpapyWeb.PictureUploader do
   use Arc.Definition
 
   # Include ecto support (requires package arc_ecto installed):
-  # use Arc.Ecto.Definition
+  use Arc.Ecto.Definition
+
+  def __storage, do: Arc.Storage.Local
 
   @versions [:original, :thumb]
 
@@ -25,13 +27,14 @@ defmodule IpapyWeb.PictureUploader do
   end
 
   # Override the persisted filenames:
-  def filename(version, _) do
-    version
-  end
+  #def filename(version, _) do
+    #  version
+    #end
 
   # Override the storage directory:
   def storage_dir(version, {file, scope}) do
-    "uploads/pitures/#{scope.id}"
+    IO.inspect scope
+    "uploads/pictures/#{version}"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

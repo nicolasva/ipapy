@@ -7,6 +7,8 @@ table.table
         = "Title"
       th
         = "Note"
+      th
+        = ""
   tbody
     = for retirement_home <- @retirement_homes do
       tr
@@ -22,6 +24,8 @@ table.table
               = if retirement_home.rating_director < 5 do
                 = for rating <- Enum.flat_map([{1, 5-retirement_home.rating_director}], fn {x, y} -> x..y end) do
                   span.ui-rating.ui-rating_not_valid
+          td
+            = link "Ajouter des photos" , to: retirement_home_picture_path(@conn, :index, retirement_home)
 
 
 = link "New retirement home", to: user_retirement_home_path(@conn, :new, @conn.assigns.current_user)

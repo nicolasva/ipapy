@@ -1,0 +1,14 @@
+= form_for @changeset, @action, [multipart: true], fn f ->
+  = if @changeset.action do
+      .alert.alert-danger
+        p Oops, something went wrong! Please check the error below.
+  .form-group
+    = label f, :title, class: "control-label"
+    = text_input f, :title, placeholder: "Titre", class: "form-control"
+    = error_tag f, :title
+  .form-group
+    = label f, :picture, class: "control-label"
+    = file_input f, :picture, class: "form-control"
+    = error_tag f, :picture
+  .form-group
+    = submit "Enregistrer cette photo", class: "btn btn-primary"

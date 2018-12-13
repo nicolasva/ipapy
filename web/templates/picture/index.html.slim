@@ -8,5 +8,11 @@ table.table
       th
         = "Picture"
   tbody
-    tr
-      td
+    = for picture <- @pictures do
+      tr
+        td
+          = picture.title
+        td
+          = img_tag(IpapyWeb.PictureUploader.url({picture.picture, picture}, :thumb))
+
+= link "Ajouter une nouvelle photo", to: retirement_home_picture_path(@conn, :new, @retirement_home)
