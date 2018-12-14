@@ -45,7 +45,7 @@ defmodule IpapyWeb.RetirementHomeController do
     render(conn, "show.html", retirement_home: retirement_home)
   end
 
-  def edit(conn, %{"retirement_home" => retirement_home_params, "id" => id}) do
+  def edit(conn, %{"id" => id, "user_id" => user_id}) do
     retirement_home = Repo.get!(RetirementHome, id)
     changeset = RetirementHome.changeset(retirement_home)
     render(conn, "edit.html", retirement_home: retirement_home, changeset: changeset)

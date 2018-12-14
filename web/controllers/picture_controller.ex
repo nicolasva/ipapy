@@ -33,4 +33,24 @@ defmodule IpapyWeb.PictureController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  def edit(conn, %{"id" => id, "retirement_home_id" => retirement_home_id}) do
+    picture = Repo.get!(Picture, id) |> Repo.preload(:retirement_home)
+    changeset = Picture.changeset(picture)
+    render(conn, "edit.html", picture: picture, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "retirement_home_id" => retirement_home_id, "picture" => picture_params, }) do
+    picture = Repo.get!(Picture, id)
+    changeset = Picture.changeset(picture, picture_params)
+
+    case Repo.update(changeset) do
+      {:ok, picture} ->
+        conn
+        |> put_flash(:info, "Cette photo a bien été mise à jour.")
+        |> redirect(to: retirement_home_picture_path(conn, :index, retirement_home_id))
+      {:error, changeset} ->
+        render(conn, "edit.html", picture: picture, changeset: changeset)
+    end
+  end
 end
