@@ -28,7 +28,7 @@ defmodule IpapyWeb.PictureController do
       {:ok, _picture} ->
         conn
         |> put_flash(:info, "Cette photo a bien été enregistré.")
-        |> redirect(to: retirement_home_picture_path(conn, :index, Repo.get(IpapyWeb.RetirementHome, picture_params["retirement_home_id"])))
+        |> redirect(to: retirement_home_picture_path(conn, :index, Repo.get(IpapyWeb.RetirementHome, retirement_home_id)))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
