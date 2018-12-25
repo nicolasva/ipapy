@@ -5,6 +5,7 @@ defmodule IpapyWeb.Picture do
   use IpapyWeb.Web, :model
   schema "pictures" do
     field :title, :string
+    field :preview_photo, :string
     field :picture, IpapyWeb.PictureUploader.Type
     belongs_to :retirement_home, IpapyWeb.RetirementHome
     timestamps()
@@ -18,9 +19,22 @@ defmodule IpapyWeb.Picture do
   """
   def changeset(model, params \\ :invalid) do
     model
-    |> cast(params, ~w(title picture), [])
+    |> cast(params, ~w(title preview_photo picture), [])
+    |> preview_photo_params(model)
     #|> cast(params, @required_fields, @optional_fields)
     |> validate_required([:retirement_home_id])
     |> cast_attachments(params, [:picture])
+  end
+
+  defp preview_photo_params(changeset, model) do
+    try do
+      if model.preview_photo == "true" do
+        retirement_home_id = model.retirement_home_id
+        from(p in IpapyWeb.Picture, where: p.retirement_home_id == ^retirement_home_id, update: [set: [preview_photo: "false"]]) |> IpapyWeb.Repo.update_all([])
+      end
+      changeset
+    rescue
+      x -> changeset
+    end
   end
 end

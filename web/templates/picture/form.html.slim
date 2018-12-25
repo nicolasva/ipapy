@@ -7,6 +7,10 @@
     = text_input f, :title, placeholder: "Titre", class: "form-control"
     = error_tag f, :title
   .form-group
+    = label f, :preview_photo, class: "control-label"
+    = checkbox f, :preview_photo
+    = error_tag f, :preview_photo
+  .form-group
     = if Blankable.blank?(@picture) do
       = label f, :picture, class: "control-label"
       = file_input f, :picture, class: "form-control"
