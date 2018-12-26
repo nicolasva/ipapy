@@ -26,6 +26,10 @@ defmodule IpapyWeb.Picture do
     |> cast_attachments(params, [:picture])
   end
 
+  def preview_picture(retirement_home_id) do
+    picture = from(p in IpapyWeb.Picture, where: p.retirement_home_id == ^retirement_home_id, where: p.preview_photo == "true", limit: 1) |> IpapyWeb.Repo.one
+  end
+
   defp preview_photo_params(changeset, model) do
     try do
       if model.preview_photo == "true" do

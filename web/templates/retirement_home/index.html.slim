@@ -8,7 +8,9 @@ table.table
       th
         = "Note"
       th
-        = ""
+        = "Aperçu de la photo"
+      th
+        = "Ajouter des photos"
       th
         = "Edition"
   tbody
@@ -26,6 +28,9 @@ table.table
               = if retirement_home.rating_director < 5 do
                 = for rating <- Enum.flat_map([{1, 5-retirement_home.rating_director}], fn {x, y} -> x..y end) do
                   span.ui-rating.ui-rating_not_valid
+          td
+            = if IpapyWeb.Picture.preview_picture(retirement_home.id) do
+              = IpapyWeb.Picture.preview_picture(retirement_home.id).title 
           td
             = link "Ajouter des photos" , to: retirement_home_picture_path(@conn, :index, retirement_home)
           td

@@ -10,7 +10,7 @@ defmodule IpapyWeb.RetirementHomeController do
     #retirement_homes = Repo.all(RetirementHome)
     users = 
       Repo.get(IpapyWeb.User, _params["user_id"]) 
-      |> Repo.preload(:retirement_homes) 
+      |> Repo.preload([retirement_homes: [:pictures]])
     render(conn, "index.html", retirement_homes: users.retirement_homes)
   end
 
