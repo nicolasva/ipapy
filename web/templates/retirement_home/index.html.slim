@@ -30,7 +30,7 @@ table.table
                   span.ui-rating.ui-rating_not_valid
           td
             = if IpapyWeb.Picture.preview_picture(retirement_home.id) do
-              = IpapyWeb.Picture.preview_picture(retirement_home.id).title 
+              = img_tag(IpapyWeb.Picture.preview_picture(retirement_home.id))
           td
             = link "Ajouter des photos" , to: retirement_home_picture_path(@conn, :index, retirement_home)
           td
