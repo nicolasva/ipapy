@@ -19,6 +19,8 @@ table.table
         td
           = img_tag(IpapyWeb.PictureUploader.url({picture.picture, picture}, :thumb))
         td
-          = link "Editer", to: retirement_home_picture_path(@conn, :edit, @retirement_home, picture)
+          = link "Editer", to: retirement_home_picture_path(@conn, :edit, @retirement_home, picture), class: "btn btn-default btn-xs"
+        td
+          = link "Supprimer", to: retirement_home_picture_path(@conn, :delete, @retirement_home, picture), method: :delete, data: [confirm: "Es tu sur de vouloir supprimer cette photo ?"], class: "btn btn-danger btn-xs"
 
 = link "Ajouter une nouvelle photo", to: retirement_home_picture_path(@conn, :new, @retirement_home)

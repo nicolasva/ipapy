@@ -12,7 +12,7 @@ defmodule IpapyWeb.RetirementHome do
     field :rating_4, :integer, virtual: true
     field :rating_5, :integer, virtual: true
     belongs_to :user, IpapyWeb.User
-    has_many :pictures, IpapyWeb.Picture
+    has_many :pictures, IpapyWeb.Picture, on_delete: :delete_all
     timestamps()
   end
 

@@ -53,4 +53,13 @@ defmodule IpapyWeb.PictureController do
         render(conn, "edit.html", picture: picture, changeset: changeset)
     end
   end
+
+  def delete(conn, %{"retirement_home_id" => retirement_home_id, "id" => id}) do
+    picture = Repo.get!(Picture, id)
+
+    Repo.delete!(picture)
+    conn
+    |> put_flash(:info, "L'image a bien été supprimé.")
+    |> redirect(to: retirement_home_picture_path(conn, :index, retirement_home_id))
+  end
 end
