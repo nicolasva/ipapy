@@ -34,7 +34,7 @@ table.table
             = if IpapyWeb.Picture.preview_picture(retirement_home.id) do
               = img_tag(IpapyWeb.Picture.preview_picture(retirement_home.id))
           td
-            = link "Ajouter des photos" , to: retirement_home_picture_path(@conn, :index, retirement_home), class: "btn btn-default btn-xs"
+            = link "Ajouter des photos" , to: retirement_home_picture_path(@conn, :index, retirement_home), class: "btn btn-primary btn-xs"
           td
             = link "Editer", to: user_retirement_home_path(@conn, :edit, @conn.assigns.current_user, retirement_home), class: "btn btn-default btn-xs"
           td
