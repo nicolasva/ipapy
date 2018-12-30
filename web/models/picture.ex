@@ -36,7 +36,8 @@ defmodule IpapyWeb.Picture do
   end
 
   def position(index, id) do
-    from(picture in IpapyWeb.Picture, where: picture.id == ^id, update: [set: [index: ^index]])
+    IO.inspect "-=-=-=-=-=-#{index}-=-=-=-=-=-=-#{id}"
+    from(picture in IpapyWeb.Picture, where: picture.id == ^id, update: [set: [position: ^index]])
     |> IpapyWeb.Repo.update_all([])
   end
 
