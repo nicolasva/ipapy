@@ -23,7 +23,10 @@ defmodule IpapyWeb.Router do
       resources "/retirement_homes", RetirementHomeController
     end
     resources "/retirement_homes", RetirementHomeController, only: [:index] do
-      resources "/pictures", PictureController, only: [:index, :edit, :update, :new, :create, :delete]
+      resources "/pictures", PictureController, only: [:index, :edit, :update, :new, :create, :delete] do
+        resources "/sorts", SortController, only: [:index]
+      end
+      match :get, "/pictures/sorts", SortController, :index
     end
     post "/roles_user/:id", RolesUserController, :update, as: :roles_user_update
     put "/roles_user/:id", RolesUserController, :update, as: :roles_user

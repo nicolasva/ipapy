@@ -6,6 +6,7 @@ defmodule IpapyWeb.Picture do
   schema "pictures" do
     field :title, :string
     field :preview_photo, :string
+    field :position, :integer
     field :picture, IpapyWeb.PictureUploader.Type
     belongs_to :retirement_home, IpapyWeb.RetirementHome
     timestamps()
@@ -27,6 +28,18 @@ defmodule IpapyWeb.Picture do
     |> cast_attachments(params, [:picture])
   end
 
+  def preview_picture(retirement_home_id) do
+    picture = from(p in IpapyWeb.Picture, where: p.retirement_home_id == ^retirement_home_id, where: p.preview_photo == "true", limit: 1) |> IpapyWeb.Repo.one
+    if picture do
+      IpapyWeb.PictureUploader.url({picture.picture, picture}, :thumb)
+    end
+  end
+
+  def position(index, id) do
+    from(picture in IpapyWeb.Picture, where: picture.id == ^id, update: [set: [index: ^index]])
+    |> IpapyWeb.Repo.update_all([])
+  end
+
   defp change_preview_photo(changeset) do
     retirement_home_id = get_field(changeset, :retirement_home_id)
     case count_pictures_by_retirement_home(retirement_home_id) do
@@ -34,13 +47,6 @@ defmodule IpapyWeb.Picture do
         force_change(changeset, :preview_photo, "true")
       _ ->
         changeset
-    end
-  end
-
-  def preview_picture(retirement_home_id) do
-    picture = from(p in IpapyWeb.Picture, where: p.retirement_home_id == ^retirement_home_id, where: p.preview_photo == "true", limit: 1) |> IpapyWeb.Repo.one
-    if picture do
-      IpapyWeb.PictureUploader.url({picture.picture, picture}, :thumb)
     end
   end
 
@@ -56,4 +62,5 @@ defmodule IpapyWeb.Picture do
   defp count_pictures_by_retirement_home(retirement_home_id) do
     from(p in IpapyWeb.Picture, where: p.retirement_home_id == ^retirement_home_id, select: count(p.id)) |> IpapyWeb.Repo.one
   end
+
 end

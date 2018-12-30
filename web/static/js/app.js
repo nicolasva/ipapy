@@ -18,5 +18,8 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
+import "./vendors/scanjs/scan.js"
+import "./vendors/jquery-ui.min.js"
 import "./front/retirement_home/form.js"
+import "./front/picture/index.js"
 // import socket from "./socket"

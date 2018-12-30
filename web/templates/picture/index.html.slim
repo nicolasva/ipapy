@@ -1,6 +1,6 @@
 h2 Listing picture
 
-table.table
+table.table#pictures_list
   thead
     tr
       th
@@ -13,7 +13,7 @@ table.table
         = "Supprimer"
   tbody
     = for picture <- @pictures do
-      tr
+      tr.pictures id="pictures_#{picture.id}"
         td
           = picture.title
         td
