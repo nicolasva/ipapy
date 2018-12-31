@@ -12,6 +12,7 @@ defmodule IpapyWeb.SortController do
     #  from(picture in IpapyWeb.Picture, where: picture.retirement_home_id == 4, order_by: picture.position) 
     #  |> IpapyWeb.Repo.all
     #render(conn, "index.json", pictures: pictures)
-    json conn, %{pictures: "true"}
+    #json conn, %{pictures: "true"}
+    render(conn, "index.json", pictures: "true")
   end
 end
