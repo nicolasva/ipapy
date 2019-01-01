@@ -1,6 +1,7 @@
-ul
+ul.list-inline
   = for retirement_home <- @retirement_homes do
-    li
-      = retirement_home.title
-      br
-      = retirement_home.detail
+    li.col-md-4
+        div.btn.btn-default.col-md-12
+          = retirement_home.title
+          br
+          = retirement_home.detail
