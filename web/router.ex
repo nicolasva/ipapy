@@ -20,9 +20,9 @@ defmodule IpapyWeb.Router do
     get "/", PageController, :index
     resources "/users", UserController, only: [:index, :show, :new, :create, :edit, :update] do
       resources "/roles_user", RolesUserController, only: [:new, :create, :edit, :update]
-      resources "/retirement_homes", RetirementHomeController
+      resources "/retirement_homes", RetirementHomeController, except: [:show]
     end
-    resources "/retirement_homes", RetirementHomeController, only: [:index] do
+    resources "/retirement_homes", RetirementHomeController, only: [:show] do
       resources "/pictures", PictureController, only: [:index, :edit, :update, :new, :create, :delete] do
         resources "/sorts", SortController, only: [:index]
       end

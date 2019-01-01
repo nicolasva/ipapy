@@ -22,4 +22,5 @@ import "./vendors/scanjs/scan.js"
 import "./vendors/jquery-ui.min.js"
 import "./front/retirement_home/form.js"
 import "./front/picture/index.js"
+import './front/page/index.js'
 // import socket from "./socket"

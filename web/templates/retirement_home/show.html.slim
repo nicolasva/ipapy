@@ -1,7 +1,7 @@
 h2
   = @retirement_home.title
-  |
-  = link "Edit", to: user_retirement_home_path(@conn, :edit, @conn.assigns.current_user, @retirement_home)
+  //=|
+  //== link "Edit", to: user_retirement_home_path(@conn, :edit, @conn.assigns.current_user, @retirement_home)
 .detail
   = @retirement_home.detail
 //= link "Edit", to: retirement_home_path(@conn, :edit, @retirement_home)

@@ -1,7 +1,19 @@
 ul.list-inline
   = for retirement_home <- @retirement_homes do
     li.col-md-4
-        div.btn.btn-default.col-md-12
+      div.btn.btn-default.col-md-12
+        = link to: retirement_home_path(@conn, :show, retirement_home) do
           = retirement_home.title
           br
-          = retirement_home.detail
+          = img_tag(IpapyWeb.Picture.preview_picture(retirement_home.id))
+          br
+          = "#{String.slice(retirement_home.detail, 0, 20)} etc..."
+          br
+        .wrapper
+          = if retirement_home.rating_director > 0 do
+            = for rating <- Enum.flat_map([{1, retirement_home.rating_director}], fn {x, y} -> x..y end) do
+              span.ui-rating.ui-rating_valid id="retirement_home_true_#{rating}"
+          = if retirement_home.rating_director < 5 do
+            = for rating <- Enum.flat_map([{1, 5-retirement_home.rating_director}], fn {x, y} -> x..y end) do
+              span.ui-rating.ui-rating_not_valid id="retirement_home_false_#{rating}"
+
