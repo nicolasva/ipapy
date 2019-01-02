@@ -5,7 +5,7 @@ defmodule IpapyWeb.RatingDirectorView do
     %{id: retirement_home.id, 
       title: retirement_home.title, 
       detail: retirement_home.detail, 
-      rating_director: retirement_home.rating_director
+      rating_director: Float.round(retirement_home.rating_director / 1)
      }
   end
 end

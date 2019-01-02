@@ -1,6 +1,6 @@
 ul.list-inline.retirement_homes
   = for retirement_home <- @retirement_homes do
-    li.col-md-4 data-object=retirement_home.id
+    li.col-md-4 data-object=retirement_home.id data-action=get_csrf_token()
       div.btn.btn-default.col-md-12
         = link to: retirement_home_path(@conn, :show, retirement_home) do
           = retirement_home.title

@@ -10,14 +10,28 @@ jQuery ->
         )
       )
   $(document).on 'click', '.ui-rating', (e) ->
-    director_rating = $(e.target).attr("data-object")
+    rating_director = $(e.target).attr("data-object")
     retirement_home_id = $(e.target).parent().parent().parent().attr("data-object")
+    csrf_token = $(e.target).parent().parent().parent().attr("data-action")
     $.ajax({
       url: "/retirement_homes/#{retirement_home_id}/rating_directors",
       type: "GET",
       dataType: "json",
       success: (result) ->
-        console.log result
+        rating_director_BD = result.rating_director
+        rating_director_average = (parseInt(rating_director_BD) + parseInt(rating_director)) / 2
+        hash_rating_director =
+          _csrf_token: csrf_token
+          retirement_home:
+            rating_director: rating_director_average
+        $.ajax({
+          url: "/retirement_homes/#{retirement_home_id}/rating_directors/#{rating_director_average}",
+          type: "PUT",
+          dataType: 'json',
+          data: hash_rating_director,
+          success: (result) ->
+            console.log result
+        })
     })
     #$.ajax({
     #  url: "/retirement_homes/#{retirement_home_id}/rating_directors/#{director_rating}"
