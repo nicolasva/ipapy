@@ -23,6 +23,7 @@ defmodule IpapyWeb.Router do
       resources "/retirement_homes", RetirementHomeController, except: [:show]
     end
     resources "/retirement_homes", RetirementHomeController, only: [:show] do
+      resources "/rating_directors", RatingDirectorController, only: [:index, :update]
       resources "/pictures", PictureController, only: [:index, :edit, :update, :new, :create, :delete] do
         resources "/sorts", SortController, only: [:index]
       end

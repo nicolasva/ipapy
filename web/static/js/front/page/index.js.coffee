@@ -10,4 +10,15 @@ jQuery ->
         )
       )
   $(document).on 'click', '.ui-rating', (e) ->
-    alert($(e.target).attr("data-object"))
+    director_rating = $(e.target).attr("data-object")
+    retirement_home_id = $(e.target).parent().parent().parent().attr("data-object")
+    $.ajax({
+      url: "/retirement_homes/#{retirement_home_id}/rating_directors",
+      type: "GET",
+      dataType: "json",
+      success: (result) ->
+        console.log result
+    })
+    #$.ajax({
+    #  url: "/retirement_homes/#{retirement_home_id}/rating_directors/#{director_rating}"
+    #})
