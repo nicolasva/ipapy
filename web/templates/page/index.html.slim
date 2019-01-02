@@ -1,4 +1,4 @@
-ul.list-inline
+ul.list-inline.retirement_homes
   = for retirement_home <- @retirement_homes do
     li.col-md-4
       div.btn.btn-default.col-md-12
@@ -9,11 +9,11 @@ ul.list-inline
           br
           = "#{String.slice(retirement_home.detail, 0, 20)} etc..."
           br
-        .wrapper
+        .wrapper.rating_director
           = if retirement_home.rating_director > 0 do
             = for rating <- Enum.flat_map([{1, retirement_home.rating_director}], fn {x, y} -> x..y end) do
-              span.ui-rating.ui-rating_valid id="retirement_home_true_#{rating}"
+              span.ui-rating.ui-rating_valid
           = if retirement_home.rating_director < 5 do
             = for rating <- Enum.flat_map([{1, 5-retirement_home.rating_director}], fn {x, y} -> x..y end) do
-              span.ui-rating.ui-rating_not_valid id="retirement_home_false_#{rating}"
+              span.ui-rating.ui-rating_not_valid
 
