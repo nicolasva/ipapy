@@ -11,6 +11,7 @@ jQuery ->
       )
   $(document).on 'click', '.ui-rating', (e) ->
     rating_director = $(e.target).attr("data-object")
+    container = $(e.target).parent()
     retirement_home_id = $(e.target).parent().parent().parent().attr("data-object")
     csrf_token = $(e.target).parent().parent().parent().attr("data-action")
     $.ajax({
@@ -19,7 +20,8 @@ jQuery ->
       dataType: "json",
       success: (result) ->
         rating_director_BD = result.rating_director
-        rating_director_average = (parseInt(rating_director_BD) + parseInt(rating_director)) / 2
+        console.log "-=-=-=-=-=-(#{parseFloat(rating_director_BD)} -=-=-=-=-+-=-=-=- #{parseFloat(rating_director)}) / 2"
+        rating_director_average = (parseFloat(rating_director_BD) + parseFloat(rating_director)) / 2
         hash_rating_director =
           _csrf_token: csrf_token
           retirement_home:
@@ -30,7 +32,21 @@ jQuery ->
           dataType: 'json',
           data: hash_rating_director,
           success: (result) ->
-            console.log result
+            $(container).children().remove()
+            console.log(result.rating_director)
+            cpt = 1
+            if result.rating_director > 0
+              #for(i = 0; i < parseInt(result.rating_director); i++) {
+              for i in [0...parseInt(result.rating_director)]
+                $(container).append("<span class='ui-rating ui-rating_valid' data-object='#{cpt}'></span>")
+                ++cpt
+              #}
+            if result.rating_director < 5
+              rating_director = 5 - result.rating_director
+              for i in [0...parseInt(rating_director)]
+                $(container).append("<span class='ui-rating ui-rating_not_valid' data-object='#{cpt}'></span>")
+                ++cpt
+            #console.log(rating)
         })
     })
     #$.ajax({
