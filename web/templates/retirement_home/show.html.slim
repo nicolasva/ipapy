@@ -4,6 +4,14 @@ h2
   //== link "Edit", to: user_retirement_home_path(@conn, :edit, @conn.assigns.current_user, @retirement_home)
 .detail
   = @retirement_home.detail
+
+  .wrapper.rating_director data-object=@retirement_home.id data-action=get_csrf_token()
+    = if @retirement_home.rating_director > 0 do
+      = for rating <- Enum.flat_map([{1, @retirement_home.rating_director}], fn {x, y} -> x..y end) do
+        span.ui-rating.ui-rating_valid
+    = if @retirement_home.rating_director < 5 do
+      = for rating <- Enum.flat_map([{1, 5-@retirement_home.rating_director}], fn {x, y} -> x..y end) do
+        span.ui-rating.ui-rating_not_valid
 //= link "Edit", to: retirement_home_path(@conn, :edit, @retirement_home)
 //| &nbsp;
 //= link "Back", to: retirement_home_path(@conn, :index)

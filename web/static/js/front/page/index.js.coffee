@@ -12,8 +12,8 @@ jQuery ->
   $(document).on 'click', '.ui-rating', (e) ->
     rating_director = $(e.target).attr("data-object")
     container = $(e.target).parent()
-    retirement_home_id = $(e.target).parent().parent().parent().attr("data-object")
-    csrf_token = $(e.target).parent().parent().parent().attr("data-action")
+    retirement_home_id = $(e.target).parent().attr("data-object")
+    csrf_token = $(e.target).parent().attr("data-action")
     $.ajax({
       url: "/retirement_homes/#{retirement_home_id}/rating_directors",
       type: "GET",
