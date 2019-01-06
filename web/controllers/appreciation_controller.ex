@@ -7,7 +7,10 @@ defmodule IpapyWeb.AppreciationController do
     changeset =
       Repo.get!(IpapyWeb.RetirementHome, retirement_home_id)
       |> build_assoc(:appreciations)
+      |> conn.assigns.current_user
+      |> build_assoc(:users)
       |> IpapyWeb.RetirementHome.changeset(appreciation_params)
+      #|> force_change(:user_id, conn.assigns.current_user.id)
 
     case Repo.insert(changeset) do
       {:ok, _retirement_home} ->

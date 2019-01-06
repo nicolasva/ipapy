@@ -12,6 +12,8 @@ h2
     = if @retirement_home.rating_director < 5 do
       = for rating <- Enum.flat_map([{1, 5-@retirement_home.rating_director}], fn {x, y} -> x..y end) do
         span.ui-rating.ui-rating_not_valid
+
+  = render IpapyWeb.AppreciationView, "form.html", changeset: @changeset, action: retirement_home_appreciation_path(@conn, :create, @retirement_home)
 //= link "Edit", to: retirement_home_path(@conn, :edit, @retirement_home)
 //| &nbsp;
 //= link "Back", to: retirement_home_path(@conn, :index)

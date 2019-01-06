@@ -14,4 +14,8 @@ defmodule IpapyWeb.Appreciation do
     |> cast(params, ~w(title comment), [])
     |> validate_required([:title, :comment, :retirement_home_id, :user_id])
   end
+
+  defp set_user(changeset) do
+    force_change(changeset, :user_id, conn.assigns.current_user.id)
+  end
 end

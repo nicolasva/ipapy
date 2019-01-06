@@ -44,8 +44,9 @@ defmodule IpapyWeb.RetirementHomeController do
     retirement_home = Repo.get!(RetirementHome, id)
     changeset = 
       retirement_home
-      |> build_assoc(:appreciations)
+      |> build_assoc(:appreciations, user_id: conn.assigns.current_user.id)
       |> IpapyWeb.Appreciation.changeset()
+
     render(conn, "show.html", retirement_home: retirement_home, changeset: changeset)
   end
 
