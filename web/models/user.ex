@@ -13,6 +13,7 @@ defmodule IpapyWeb.User do
     field :cp_postal, :string
     field :city ,:string
     field :country, :string
+    has_many :appreciations, IpapyWeb.Appreciation
     many_to_many :roles, IpapyWeb.Role, join_through: "roles_users", on_replace: :delete
     has_many :retirement_homes, IpapyWeb.RetirementHome
     timestamps()

@@ -42,7 +42,11 @@ defmodule IpapyWeb.RetirementHomeController do
 
   def show(conn, %{"id" => id}) do
     retirement_home = Repo.get!(RetirementHome, id)
-    render(conn, "show.html", retirement_home: retirement_home)
+    changeset = 
+      retirement_home
+      |> build_assoc(:appreciations)
+      |> IpapyWeb.Appreciation.changeset()
+    render(conn, "show.html", retirement_home: retirement_home, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id, "user_id" => user_id}) do
