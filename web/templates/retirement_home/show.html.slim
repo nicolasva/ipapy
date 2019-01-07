@@ -5,13 +5,7 @@ h2
 .detail
   = @retirement_home.detail
 
-  .wrapper.rating_director data-object=@retirement_home.id data-action=get_csrf_token()
-    = if @retirement_home.rating_director > 0 do
-      = for rating <- Enum.flat_map([{1, @retirement_home.rating_director}], fn {x, y} -> x..y end) do
-        span.ui-rating.ui-rating_valid
-    = if @retirement_home.rating_director < 5 do
-      = for rating <- Enum.flat_map([{1, 5-@retirement_home.rating_director}], fn {x, y} -> x..y end) do
-        span.ui-rating.ui-rating_not_valid
+  = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: @retirement_home
 
   = render IpapyWeb.AppreciationView, "form.html", changeset: @changeset, action: retirement_home_appreciation_path(@conn, :create, @retirement_home)
 //= link "Edit", to: retirement_home_path(@conn, :edit, @retirement_home)

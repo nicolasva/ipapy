@@ -1,0 +1,7 @@
+.wrapper.rating_director data-object=@retirement_home.id data-action=get_csrf_token()
+  = if @retirement_home.rating_director > 0 do
+    = for rating <- Enum.flat_map([{1, @retirement_home.rating_director}], fn {x, y} -> x..y end) do
+      span.ui-rating.ui-rating_valid
+  = if @retirement_home.rating_director < 5 do
+    = for rating <- Enum.flat_map([{1, 5-@retirement_home.rating_director}], fn {x, y} -> x..y end) do
+      span.ui-rating.ui-rating_not_valid
