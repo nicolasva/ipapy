@@ -9,4 +9,11 @@ defmodule IpapyWeb.Location do
     belongs_to :retirement_home, IpapyWeb.RetirementHome
     timestamps()
   end
+
+  def changeset(model, params \\ :invalid) do
+    model
+    |> cast(params, ~w(address cp_postal city country), [])
+    |> cast_assoc(:retirement_home)
+    |> validate_required([:address, :cp_postal, :city, :country])
+  end
 end

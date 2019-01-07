@@ -28,6 +28,7 @@ defmodule IpapyWeb.RetirementHome do
     model
     |> cast(params, ~w(title detail rating_director), [])
     #|> cast(params, @required_fields, @optional_fields)
+    |> cast_assoc(:location)
     |> validate_required([:title, :detail, :user_id])
   end
 end

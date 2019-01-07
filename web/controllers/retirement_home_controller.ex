@@ -19,6 +19,7 @@ defmodule IpapyWeb.RetirementHomeController do
     changeset = 
       conn.assigns.current_user
       |> build_assoc(:retirement_homes)
+      |> Repo.preload(:location)
       |> RetirementHome.changeset()
     render(conn, "new.html", changeset: changeset)
   end
@@ -27,6 +28,7 @@ defmodule IpapyWeb.RetirementHomeController do
     changeset = 
         conn.assigns.current_user
         |> build_assoc(:retirement_homes)
+        |> Repo.preload(:location)
         |> RetirementHome.changeset(retirement_home_params)
     #changeset = RetirementHome.changeset(%RetirementHome{}, retirement_home_params)
     
@@ -34,7 +36,7 @@ defmodule IpapyWeb.RetirementHomeController do
       {:ok, _retirement_home} ->
         conn
         |> put_flash(:info, "Cette maison de retraite a bien été enregistré.")
-        |> redirect(to: user_retirement_home_path(conn, :show, conn.assigns.current_user, _retirement_home))
+        |> redirect(to: user_retirement_home_path(conn, :index, conn.assigns.current_user))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
