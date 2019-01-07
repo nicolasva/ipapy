@@ -53,20 +53,20 @@ defmodule IpapyWeb.RetirementHomeController do
   end
 
   def edit(conn, %{"id" => id, "user_id" => user_id}) do
-    retirement_home = Repo.get!(RetirementHome, id)
+    retirement_home = Repo.get!(RetirementHome, id) |> Repo.preload(:location)
     changeset = RetirementHome.changeset(retirement_home)
     render(conn, "edit.html", retirement_home: retirement_home, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "retirement_home" => retirement_home_params}) do
-    retirement_home = Repo.get!(RetirementHome, id)
+    retirement_home = Repo.get!(RetirementHome, id) |> Repo.preload(:location)
     changeset = RetirementHome.changeset(retirement_home, retirement_home_params)
 
     case Repo.update(changeset) do
       {:ok, retirement_home} ->
         conn
         |> put_flash(:info, "Retirement home updated successfully.")
-        |> redirect(to: user_retirement_home_path(conn, :show, conn.assigns.current_user, retirement_home))
+        |> redirect(to: user_retirement_home_path(conn, :index, conn.assigns.current_user))
       {:error, changeset} ->
         render(conn, "edit.html", retirement_home: retirement_home, changeset: changeset)
     end
