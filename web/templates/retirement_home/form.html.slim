@@ -8,7 +8,7 @@
     = error_tag f, :title
   .form-group
     = label f, :detail, class: "control-label"
-    = text_input f, :detail, placeholder: "Detail", class: "form-control"
+    = textarea f, :detail, placeholder: "Detail", class: "form-control"
     = error_tag f, :detail
   .wrapper
     = text_input f, :rating_director
@@ -22,5 +22,22 @@
     = label f, :rating_4, ""
     = checkbox f, :rating_5, class: "rating"
     = label f, :rating_5, ""
+  = inputs_for f, :location, fn location ->
+    .form-group
+      = label location, :address, class: "control-label"
+      = text_input location, :address, placeholder: "Adresse", class: "form-control"
+      = error_tag location, :address
+    .form-group
+      = label location, :cp_postal, class: "control-label"
+      = text_input location, :cp_postal, placeholder: "Code postal", class: "form-control"
+      = error_tag location, :cp_postal
+    .form-group
+      = label location, :city, class: "control-label"
+      = text_input location, :city, placeholder: "Ville", class: "form-control"
+      = error_tag location, :city
+    .form-group
+      = label location, :country, class: "control-label"
+      = text_input location, :country, placeholder: "Pays", class: "form-control"
+      = error_tag location, :country
   .form-group
     = submit "Submit", class: "btn btn-primary"

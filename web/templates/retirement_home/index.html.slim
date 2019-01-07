@@ -23,13 +23,7 @@ table.table
           td
             //- Enum.each([1, 2, 3], fn x -> 
             //   = x
-            .wrapper
-              = if retirement_home.rating_director > 0 do
-                = for rating <- Enum.flat_map([{1, retirement_home.rating_director}], fn {x, y} -> x..y end) do
-                  span.ui-rating.ui-rating_valid
-              = if retirement_home.rating_director < 5 do
-                = for rating <- Enum.flat_map([{1, 5-retirement_home.rating_director}], fn {x, y} -> x..y end) do
-                  span.ui-rating.ui-rating_not_valid
+            = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: retirement_home
           td
             = if IpapyWeb.Picture.preview_picture(retirement_home.id) do
               = img_tag(IpapyWeb.Picture.preview_picture(retirement_home.id))

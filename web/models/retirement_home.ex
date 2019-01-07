@@ -14,6 +14,7 @@ defmodule IpapyWeb.RetirementHome do
     belongs_to :user, IpapyWeb.User
     has_many :appreciations, IpapyWeb.Appreciation, on_delete: :delete_all
     has_many :pictures, IpapyWeb.Picture, on_delete: :delete_all
+    has_one :location, IpapyWeb.Location
     timestamps()
   end
 
