@@ -4,4 +4,5 @@ $icon-font-path: "/fonts/"; /* use fonts from priv/static/fonts/ */
 
 @import "custom";
 
-@import "star_rating/star_rating";
+@import "front/star_rating/star_rating";
+@import "front/appreciation/show";

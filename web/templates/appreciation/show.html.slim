@@ -4,11 +4,10 @@
 - else
   ul.list-unstyled.appreciation
     = for appreciation <- @appreciations do
-      li.bg-info.table-bordered
+      li.bg-info.table-bordered.detail-appreciation
         dl
           dt
             = "Titre"
-            = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: appreciation
           dd
             = appreciation.title
           dt
@@ -19,3 +18,5 @@
             = "Commentaire"
           dd
             = appreciation.comment
+
+        = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: appreciation
