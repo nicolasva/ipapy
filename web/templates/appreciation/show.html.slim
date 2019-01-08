@@ -2,11 +2,19 @@
   p.alert.alert-info
     = "Aucun commentaire pour cette maison de retraite"
 - else
-  ul
+  ul.list-unstyled
     = for appreciation <- @appreciations do
-      li
-        = appreciation.title
-        br
-        = link(appreciation.user.email, to: "mailto:#{appreciation.user.email}")
-        br
-        = appreciation.comment
+      li.bg-info.table-bordered
+        dl.dl-horizontal
+          dt
+            = "Titre"
+          dd
+            = appreciation.title
+          dt
+            = "Email"
+          dd
+            = link(appreciation.user.email, to: "mailto:#{appreciation.user.email}")
+          dt
+            = "Commentaire"
+          dd
+            = appreciation.comment
