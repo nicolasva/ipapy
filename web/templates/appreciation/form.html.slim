@@ -10,6 +10,18 @@
     = label f, :comment, class: "control-label"
     = textarea f, :comment, placeholder: "Commentaire", class: "form-control"
     = error_tag f, :comment
+  .wrapper
+    = text_input f, :rating_director
+    = checkbox f, :rating_1, class: "rating"
+    = label f, :rating_1, ""
+    = checkbox f, :rating_2, class: "rating"
+    = label f, :rating_2, ""
+    = checkbox f, :rating_3, class: "rating"
+    = label f, :rating_3, ""
+    = checkbox f, :rating_4, class: "rating"
+    = label f, :rating_4, ""
+    = checkbox f, :rating_5, class: "rating"
+    = label f, :rating_5, ""
   //.form-group
     = label f, :retirement_home_id, class: "control-label"
     = text_input f, :retirement_home_id, placeholder: "Commentaire", class: "form-control"

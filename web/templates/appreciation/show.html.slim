@@ -2,12 +2,13 @@
   p.alert.alert-info
     = "Aucun commentaire pour cette maison de retraite"
 - else
-  ul.list-unstyled
+  ul.list-unstyled.appreciation
     = for appreciation <- @appreciations do
       li.bg-info.table-bordered
         dl
           dt
             = "Titre"
+            = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: appreciation
           dd
             = appreciation.title
           dt

@@ -10,6 +10,7 @@ jQuery ->
         )
       )
   $(document).on 'click', '.ui-rating', (e) ->
+    return false if $(e.target).parent().parent().parent().parent().parent().attr("class") == "list-unstyled appreciation"
     rating_director = $(e.target).attr("data-object")
     container = $(e.target).parent()
     retirement_home_id = $(e.target).parent().attr("data-object")
