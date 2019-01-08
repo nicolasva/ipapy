@@ -1,19 +1,21 @@
-h2
-  = @retirement_home.title
-  //=|
-  //== link "Edit", to: user_retirement_home_path(@conn, :edit, @conn.assigns.current_user, @retirement_home)
-.detail
-  = @retirement_home.detail
+.row
+  h2
+    .col-md-6
+      = @retirement_home.title
+    .col-md-6
+      = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: @retirement_home
+    //=|
+    //== link "Edit", to: user_retirement_home_path(@conn, :edit, @conn.assigns.current_user, @retirement_home)
+  .detail.col-md-12
+    = @retirement_home.detail
 
-  = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: @retirement_home
+    = unless is_nil(@conn.assigns.current_user) do
+      = render IpapyWeb.AppreciationView, "form.html", changeset: @changeset, action: retirement_home_appreciation_path(@conn, :create, @retirement_home)
+    - else
+      p.alert.alert-danger
+        = "Veuillez vous identifier pour poster un commentaire"
 
-  = unless is_nil(@conn.assigns.current_user) do
-    = render IpapyWeb.AppreciationView, "form.html", changeset: @changeset, action: retirement_home_appreciation_path(@conn, :create, @retirement_home)
-  - else
-    p.alert.alert-danger
-      = "Veuillez vous identifier pour poster un commentaire"
-
-  = render IpapyWeb.AppreciationView, "show.html", appreciations: @retirement_home.appreciations
-//= link "Edit", to: retirement_home_path(@conn, :edit, @retirement_home)
-//| &nbsp;
-//= link "Back", to: retirement_home_path(@conn, :index)
+    = render IpapyWeb.AppreciationView, "show.html", appreciations: @retirement_home.appreciations
+  //= link "Edit", to: retirement_home_path(@conn, :edit, @retirement_home)
+  //| &nbsp;
+  //= link "Back", to: retirement_home_path(@conn, :index)
