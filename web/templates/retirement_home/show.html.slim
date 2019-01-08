@@ -7,7 +7,7 @@ h2
 
   = render IpapyWeb.RatingDirectorView, "show.html", retirement_home: @retirement_home
 
-  = unless !is_nil(@conn.assigns.current_user) do
+  = unless is_nil(@conn.assigns.current_user) do
     = render IpapyWeb.AppreciationView, "form.html", changeset: @changeset, action: retirement_home_appreciation_path(@conn, :create, @retirement_home)
   - else
     p.alert.alert-danger
