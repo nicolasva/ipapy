@@ -1,0 +1,12 @@
+= if Enum.empty?(@appreciations) do
+  p.alert.alert-info
+    = "Aucun commentaire pour cette maison de retraite"
+- else
+  ul
+    = for appreciation <- @appreciations do
+      li
+        = appreciation.title
+        br
+        = "#{appreciation.name} <#{appreciation.email}>"
+        br
+        = appreciation.comment
