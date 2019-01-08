@@ -7,6 +7,6 @@
       li
         = appreciation.title
         br
-        = appreciation.user.email
+        = link(appreciation.user.email, to: "mailto:#{appreciation.user.email}")
         br
         = appreciation.comment
