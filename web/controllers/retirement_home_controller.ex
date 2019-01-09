@@ -44,7 +44,7 @@ defmodule IpapyWeb.RetirementHomeController do
 
   def show(conn, %{"id" => id}) do
     retirement_home = Repo.get!(RetirementHome, id)
-                      |> Repo.preload([[appreciations: :user], :location])
+                      |> Repo.preload([[appreciations: :user], :location, :pictures])
     changeset = 
       retirement_home
       |> build_assoc(:appreciations)

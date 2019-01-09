@@ -5,7 +5,7 @@ defmodule IpapyWeb.AppreciationController do
 
   def new(conn, %{"retirement_home_id" => retirement_home_id}) do
     retirement_home = Repo.get!(IpapyWeb.RetirementHome, 11)
-                      |> Repo.preload([[appreciations: :user], :location])
+                      |> Repo.preload([[appreciations: :user], :location, :pictures])
     changeset =
       retirement_home
       |> build_assoc(:appreciations)
@@ -16,7 +16,7 @@ defmodule IpapyWeb.AppreciationController do
 
   def create(conn, %{"appreciation" => appreciation_params, "retirement_home_id" => retirement_home_id}) do
     retirement_home = Repo.get!(IpapyWeb.RetirementHome, retirement_home_id)
-                      |> Repo.preload([[appreciations: :user], :location])
+                      |> Repo.preload([[appreciations: :user], :location, :pictures])
     changeset =
       retirement_home 
       |> build_assoc(:appreciations, user_id: conn.assigns.current_user.id)
