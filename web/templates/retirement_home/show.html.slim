@@ -12,7 +12,8 @@
     ul.list-unstyled
       = for picture <- @retirement_home.pictures do
         li
-          = img_tag(IpapyWeb.PictureUploader.url({picture.picture, picture}, :thumb))
+          = link to: IpapyWeb.PictureUploader.url({picture.picture, picture}, :original), data: [lightbox: "retirement_home_picture", title: picture.title] do
+            = img_tag(IpapyWeb.PictureUploader.url({picture.picture, picture}, :thumb))
 
     = unless is_nil(@conn.assigns.current_user) do
       = render IpapyWeb.AppreciationView, "form.html", changeset: @changeset, action: retirement_home_appreciation_path(@conn, :create, @retirement_home)
