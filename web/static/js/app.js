@@ -20,6 +20,7 @@ import "phoenix_html"
 
 import "./vendors/scanjs/scan.js"
 import "./vendors/jquery-ui.min.js"
+import "./vendors/lightbox/lightbox.js"
 import "./vendors/lodash.js"
 import "./front/retirement_home/form.js"
 import "./front/retirement_home/show.js"
