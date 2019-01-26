@@ -33,7 +33,6 @@ defmodule IpapyWeb.PictureUploader do
 
   # Override the storage directory:
   def storage_dir(version, {file, scope}) do
-    IO.inspect scope
     "uploads/pictures/#{version}"
   end
 
